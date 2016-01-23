@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
   public Text winText;
@@ -34,6 +35,8 @@ public class GameController : MonoBehaviour {
       ShutdownCamera();
       currInv = terminateInv;
     }
+		if (Input.GetKeyDown (KeyCode.R))
+			restartlvl ();
   }
 
   void ShutdownCamera() {
@@ -53,4 +56,9 @@ public class GameController : MonoBehaviour {
   public void Win() {
     winText.text = "Win!";
   }
+
+	public void restartlvl(){
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+	}
+
 }
