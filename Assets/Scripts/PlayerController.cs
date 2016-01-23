@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
   public GameObject particle;
   public DeviceController currentDevice;
 	public AudioClip jumpFx;
+	public GameController gameController;
 
   private bool hasFired;
 
@@ -21,6 +22,10 @@ public class PlayerController : MonoBehaviour {
   }
 
   void FixedUpdate() {
+	if (gameController.isGameOver ()) {
+		return;
+	}
+
     if (!hasFired && Input.GetButtonDown("Fire1")) {
       FireRay();
       hasFired = true;
