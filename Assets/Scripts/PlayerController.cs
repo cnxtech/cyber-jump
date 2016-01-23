@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip jumpFx;
 
   private bool hasFired;
-	public GameObject currDevice;
 
   void Start() {
     hasFired = false;
