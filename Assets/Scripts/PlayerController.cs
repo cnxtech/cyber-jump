@@ -5,9 +5,9 @@ public class PlayerController : MonoBehaviour {
 
   public GameObject particle;
   public DeviceController currentDevice;
+	public AudioClip jumpFx;
 
   private bool hasFired;
-	public GameObject currDevice;
 
   void Start() {
     hasFired = false;
@@ -36,14 +36,15 @@ public class PlayerController : MonoBehaviour {
     RaycastHit hit;
 
     if (Physics.Raycast(ray, out hit)) {
-      GameObject device = hit.collider.gameObject;
+      GameObject collidedDevice = hit.collider.gameObject;
 
-      if (device.CompareTag("Device")) {
+      if (collidedDevice.CompareTag("Device")) {
 
-        Instantiate(particle, device.transform.position, device.transform.rotation);
+        Instantiate(particle, collidedDevice.transform.position, collidedDevice.transform.rotation);
 
-        currentDevice = device.GetComponent<DeviceController>();
+        currentDevice = collidedDevice.GetComponent<DeviceController>();
         if (currentDevice.IsFunctioning()) {
+          GetComponent<AudioSource>().PlayOneShot(jumpFx);
           currentDevice.CyberJump(this);
         }
       }
