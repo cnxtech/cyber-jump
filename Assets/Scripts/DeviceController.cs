@@ -3,10 +3,11 @@ using System.Collections;
 
 public class DeviceController : MonoBehaviour {
   public string type;
-
+	public bool functioning;
   private GameController gameController;
 
   void Start() {
+	functioning = true;
     gameController = GameObject.Find("GameController").GetComponent<GameController>();
   }
 
@@ -32,5 +33,11 @@ public class DeviceController : MonoBehaviour {
   void TransformPlayer(PlayerController player) {
     player.transform.position = transform.position;
     player.transform.rotation = transform.rotation;
+  }
+
+  public void Disable() {
+	MeshRenderer rend = GetComponent<MeshRenderer> ();
+	rend.material.SetColor ("_Color", Color.red);
+	functioning = false;
   }
 }
