@@ -4,8 +4,8 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
   public GameObject particle;
+  public DeviceController currentDevice;
 
-  private DeviceController currentDevice;
   private bool hasFired;
 
   void Start() {
