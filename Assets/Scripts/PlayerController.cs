@@ -32,20 +32,19 @@ public class PlayerController : MonoBehaviour {
   }
 
   void FireRay() {
-		
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
     RaycastHit hit;
 
     if (Physics.Raycast(ray, out hit)) {
-      GameObject device = hit.collider.gameObject;
+      GameObject collidedDevice = hit.collider.gameObject;
 
-      if (device.CompareTag("Device")) {
+      if (collidedDevice.CompareTag("Device")) {
 
-        Instantiate(particle, device.transform.position, device.transform.rotation);
+        Instantiate(particle, collidedDevice.transform.position, collidedDevice.transform.rotation);
 
-        currentDevice = device.GetComponent<DeviceController>();
+        currentDevice = collidedDevice.GetComponent<DeviceController>();
         if (currentDevice.IsFunctioning()) {
-			GetComponent<AudioSource> ().PlayOneShot (jumpFx);
+          GetComponent<AudioSource>().PlayOneShot(jumpFx);
           currentDevice.CyberJump(this);
         }
       }

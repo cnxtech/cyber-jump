@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
       if (index < cameras.Length) {
         DeviceController nextDeviceController = NextDeviceController();
         if (player.IsCurrentDevice(nextDeviceController)) {
-          progPercentage = (1-currInv/terminateInv)*100;
+          progPercentage = (1 - currInv/terminateInv) * 100;
           progress.text = progPercentage.ToString("F2");
         }
       }
