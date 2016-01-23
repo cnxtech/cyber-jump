@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
   public DeviceController currentDevice;
 
   private bool hasFired;
+	public GameObject currDevice;
 
   void Start() {
     hasFired = false;
@@ -38,11 +39,18 @@ public class PlayerController : MonoBehaviour {
       GameObject device = hit.collider.gameObject;
 
       if (device.CompareTag("Device")) {
+
         Instantiate(particle, device.transform.position, device.transform.rotation);
 
         currentDevice = device.GetComponent<DeviceController>();
-        currentDevice.CyberJump(this);
+        if (currentDevice.IsFunctioning()) {
+          currentDevice.CyberJump(this);
+        }
       }
     }
+  }
+
+  public bool IsCurrentDevice(DeviceController otherController) {
+    return currentDevice == otherController;
   }
 }

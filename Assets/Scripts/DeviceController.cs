@@ -14,7 +14,10 @@ public class DeviceController : MonoBehaviour {
   private bool rotateRight;
   private float startTime;
 
+  private bool functioning;
+
   void Start() {
+    functioning = true;
     gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
     if (leftCam != null && rightCam != null) {
@@ -51,10 +54,6 @@ public class DeviceController : MonoBehaviour {
       rotateRight = true;
       startTime = Time.time;
     }
-
-    /*if(transform.rotation > Quaternion.AngleAxis(30,Vector3.up)){
-      transform.Rotate (Vector3.up * 90*Time.deltaTime);
-    }*/
   }
 
   public void CyberJump(PlayerController player) {
@@ -72,5 +71,13 @@ public class DeviceController : MonoBehaviour {
   void ExitCyberJump(PlayerController player) {
     Debug.Log("I am exit");
     gameController.Win();
+  }
+
+  public void Disable() {
+    functioning = false;
+  }
+
+  public bool IsFunctioning() {
+    return functioning;
   }
 }
