@@ -5,10 +5,18 @@ public class PlayerController : MonoBehaviour {
 
   public GameObject particle;
 
+  private DeviceController currentDevice;
   private bool hasFired;
 
   void Start() {
     hasFired = false;
+  }
+
+  void Update() {
+    if (currentDevice != null) {
+      transform.position = currentDevice.transform.position;
+      transform.rotation = currentDevice.transform.rotation;
+    }
   }
 
   void FixedUpdate() {
@@ -32,8 +40,8 @@ public class PlayerController : MonoBehaviour {
       if (device.CompareTag("Device")) {
         Instantiate(particle, device.transform.position, device.transform.rotation);
 
-        DeviceController deviceController = device.GetComponent<DeviceController>();
-        deviceController.CyberJump(this);
+        currentDevice = device.GetComponent<DeviceController>();
+        currentDevice.CyberJump(this);
       }
     }
   }
