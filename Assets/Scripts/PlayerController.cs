@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour {
 
   public GameObject particle;
   public DeviceController currentDevice;
+	public AudioClip jumpFx;
 
   private bool hasFired;
 	public GameObject currDevice;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour {
   }
 
   void FireRay() {
+		
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
     RaycastHit hit;
 
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 
         currentDevice = device.GetComponent<DeviceController>();
         if (currentDevice.IsFunctioning()) {
+			GetComponent<AudioSource> ().PlayOneShot (jumpFx);
           currentDevice.CyberJump(this);
         }
       }
