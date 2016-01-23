@@ -7,6 +7,7 @@ public class DeviceController : MonoBehaviour {
   public float speed;
   public GameObject leftCam;
   public GameObject rightCam;
+  public GameObject model;
 
   private GameController gameController;
   private Quaternion leftRotation;
@@ -15,6 +16,7 @@ public class DeviceController : MonoBehaviour {
   private float startTime;
 
   private bool functioning;
+
 
   void Start() {
     functioning = true;
@@ -56,7 +58,14 @@ public class DeviceController : MonoBehaviour {
     }
   }
 
+  public void SetModel(bool enabled) {
+    if (model != null) {
+      model.SetActive(enabled);
+    }
+  }
+
   public void CyberJump(PlayerController player) {
+    SetModel(false);
     if (type == "SecurityCamera") {
       SecurityCameraCyberJump(player);
     } else if (type == "Exit") {

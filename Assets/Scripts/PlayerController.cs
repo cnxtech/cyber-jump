@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour {
 
   void Start() {
     hasFired = false;
+    if (currentDevice != null) {
+      currentDevice.SetModel(false);
+    }
   }
 
   void Update() {
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour {
 
         Instantiate(particle, collidedDevice.transform.position, collidedDevice.transform.rotation);
 
+        currentDevice.SetModel(true);
         currentDevice = collidedDevice.GetComponent<DeviceController>();
         if (currentDevice.IsFunctioning()) {
           GetComponent<AudioSource>().PlayOneShot(jumpFx);
